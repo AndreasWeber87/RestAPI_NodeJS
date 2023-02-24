@@ -1,41 +1,66 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+"use strict";
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const express = require("express");
 
-var app = express();
+const worker = () => {
+  const api = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+  api.use(cors());
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+  // parse application/x-www-form-urlencoded
+  api.use(bodyParser.urlencoded({ extended: false }));
+  // parse application/json
+  api.use(bodyParser.json());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+  api.get("/", (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+    try {
+      res.end(`{"message":"Hello World! I'm the NodeJS API."}`);
+    }
+    catch(err) {
+      console.log("Error occurred: " + err);
+      res.statusMessage = err;
+      res.status(500).end(); // on an error send http code 500 (= Internal Server Error) to the client
+    }
+  });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  api.get('/hello', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+    try {
+      res.end(`{"message":"Hello ${req.query.name}! I'm the NodeJS API."}`);
+    }
+    catch(err) {
+      console.log("Error occurred: " + err);
+      res.statusMessage = err;
+      res.status(500).end(); // on an error send http code 500 (= Internal Server Error) to the client
+    }
+  });
 
-module.exports = app;
+  api.post("/hello", (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+
+    try {
+      res.end(`{"message":"Hello ${req.body.name}! I'm the NodeJS API."}`);
+    }
+    catch(err) {
+      console.log("Error occurred: " + err);
+      res.statusMessage = err;
+      res.status(500).end(); // on an error send http code 500 (= Internal Server Error) to the client
+    }
+  });
+
+  api.listen(7000, () => {
+    console.log("Server started on port 7000...");
+    console.log("");
+    console.log("Possible calls:");
+    console.log("http://localhost:7000/");
+    console.log("GET: http://localhost:7000/hello?name=ic20b050");
+    console.log("POST: http://localhost:7000/hello  name=ic20b050");
+  });
+}
+
+worker();
