@@ -1,5 +1,6 @@
 "use strict";
 
+// http://expressjs.com
 // https://node-postgres.com/
 // https://blog.logrocket.com/crud-rest-api-node-js-express-postgresql/
 
@@ -21,7 +22,7 @@ api.post("/hello", queries.sayHelloPost);
 
 api.get('/getGemeinde', queriesDB.getGemeinde);
 
-api.listen(11000, () => {
+api.listen(7000, () => {
   console.log("Server started on port 7000...");
   console.log("");
   console.log("Possible calls:");

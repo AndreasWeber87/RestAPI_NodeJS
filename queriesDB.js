@@ -14,22 +14,25 @@ const pool = new Pool({
 });
 
 const getGemeinde = async (req, res) => {
-    const client = await pool.connect()
+    let client = null;
 
     try {
+        client = await pool.connect();
         const resDB = await client.query({
             rowMode: 'array',
             text: `SELECT gemeindename FROM public.gemeinde WHERE gkz=${req.query.id} LIMIT 1`,
         });
 
-        res.json({gemeindename: resDB.rows[0]});
+        res.json({"gemeindename": resDB.rows[0]});
     } catch (err) {
-        console.log("Error occurred: " + err);
-        res.statusMessage = err;
-        res.status(500).end(); // on an error send http code 500 (= Internal Server Error) to the client
+        console.log(err.stack);
+        res.writeHead(500, {'Content-Type' : 'application/json'});
+        res.end(`{"message": "${err.stack}"}`.replace("\n", "\\n"));
     }
     finally {
-        await client.end();
+        if (client !== null) {
+            await client.end();
+        }
     }
 };
 
