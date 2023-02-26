@@ -1,5 +1,6 @@
 "use strict";
 
+// Sources:
 // http://expressjs.com
 // https://node-postgres.com/
 // https://blog.logrocket.com/crud-rest-api-node-js-express-postgresql/
