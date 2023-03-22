@@ -23,13 +23,13 @@ api.post("/hello", queries.sayHelloPost);
 
 api.get('/getGemeinde', queriesDB.getGemeinde);
 
-api.listen(7000, () => {
-  console.log("Server started on port 7000...");
+api.listen(8000, () => {
+  console.log("Server started on port 8000...");
   console.log("");
   console.log("Possible calls:");
-  console.log("http://localhost:7000/");
-  console.log("GET: http://localhost:7000/hello?name=ic20b050");
-  console.log("POST: http://localhost:7000/hello  name=ic20b050");
+  console.log("http://localhost:8000/");
+  console.log("GET: http://localhost:8000/hello?name=ic20b050");
+  console.log("POST: http://localhost:8000/hello  name=ic20b050");
   console.log("");
-  console.log("GET: http://localhost:7000/getGemeinde?id=10101");
+  console.log("GET: http://localhost:8000/getGemeinde?id=10101");
 });
