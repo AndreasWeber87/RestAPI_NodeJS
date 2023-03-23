@@ -32,6 +32,7 @@ const getGemeinde = async (req, res) => {
     finally {
         if (client !== null) {
             await client.end();
+            await client.release();
         }
     }
 };
