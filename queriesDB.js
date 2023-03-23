@@ -14,26 +14,17 @@ const pool = new Pool({
 });
 
 const getGemeinde = async (req, res) => {
-    let client = null;
-
     try {
-        client = await pool.connect();
-        const resDB = await client.query({
-            rowMode: 'array',
-            text: `SELECT gemeindename FROM public.gemeinde WHERE gkz=${req.query.id} LIMIT 1`,
-        });
-
-        res.json({"gemeindename": resDB.rows[0]});
+        pool.query(`SELECT gemeindename FROM public.gemeinde WHERE gkz=${req.query.id} LIMIT 1`, (error, results) => {
+            if (error) {
+                throw error
+            }
+            res.status(200).json(results.rows)
+        })
     } catch (err) {
         console.log(err.stack);
         res.writeHead(500, {'Content-Type' : 'application/json'});
         res.end(`{"message": "${err.stack}"}`.replace("\n", "\\n"));
-    }
-    finally {
-        if (client !== null) {
-            await client.end();
-            await client.release();
-        }
     }
 };
 
