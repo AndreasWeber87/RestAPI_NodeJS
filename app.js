@@ -18,9 +18,6 @@ api.use(bodyParser.urlencoded({extended: false}));
 api.use(bodyParser.json());
 
 api.get('/', queries.home);
-api.get('/hello', queries.sayHelloGet);
-api.post("/hello", queries.sayHelloPost);
-
 api.get('/getGemeinde', queriesDB.getGemeinde);
 
 api.listen(8000, () => {
@@ -28,8 +25,5 @@ api.listen(8000, () => {
   console.log("");
   console.log("Possible calls:");
   console.log("http://localhost:8000/");
-  console.log("GET: http://localhost:8000/hello?name=ic20b050");
-  console.log("POST: http://localhost:8000/hello  name=ic20b050");
-  console.log("");
   console.log("GET: http://localhost:8000/getGemeinde?id=10101");
 });
