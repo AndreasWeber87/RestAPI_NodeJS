@@ -92,7 +92,11 @@ const getStrasse = async (req, res) => {
                 if (error) {
                     throw error;
                 }
-                res.status(200).json(results.rows);
+                if (results.rows.length === 0) {
+                    res.sendStatus(404);
+                    return;
+                }
+                res.status(200).json({ "skz": req.query.skz, "strassenname": results.rows[0].strassenname });
             });
     } catch (err) {
         console.log(err.stack);

@@ -24,6 +24,7 @@ api.get('/getStrasse', queries.getStrasse);
 api.delete('/deleteStrasse/:skz', queries.deleteStrasse);
 
 api.listen(8000, () => {
+//api.listen(10000, () => {
   console.log("Server started on port 8000...");
   console.log("");
   console.log("Possible calls:");
