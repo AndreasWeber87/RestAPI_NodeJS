@@ -87,7 +87,8 @@ const changeStrasse = async (req, res) => {
 // GET: http://localhost:8000/getStrasse?skz=108711
 const getStrasse = async (req, res) => {
     try {
-        pool.query("SELECT strassenname FROM public.strasse WHERE skz=$1 LIMIT 1;", [req.query.skz],
+        const skz = parseInt(req.query.skz, 10);
+        pool.query("SELECT strassenname FROM public.strasse WHERE skz=$1 LIMIT 1;", [skz],
             (error, results) => {
                 if (error) {
                     throw error;
@@ -96,7 +97,7 @@ const getStrasse = async (req, res) => {
                     res.sendStatus(404);
                     return;
                 }
-                res.status(200).json({ "skz": req.query.skz, "strassenname": results.rows[0].strassenname });
+                res.status(200).json({ "skz": skz, "strassenname": results.rows[0].strassenname });
             });
     } catch (err) {
         console.log(err.stack);
