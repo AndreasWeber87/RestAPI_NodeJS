@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS public.strasse
                 if (error) {
                     throw error;
                 }
-                res.sendStatus(201);
+                res.sendStatus(201).json({"message": "Table created successfully."});
             });
     } catch (err) {
         console.log(err.stack);
@@ -58,7 +58,7 @@ const addStrasse = async (req, res) => {
                 if (error) {
                     throw error;
                 }
-                res.sendStatus(201);
+                res.sendStatus(201).json({"message": "Street added successfully."});
             });
     } catch (err) {
         console.log(err.stack);
@@ -76,7 +76,7 @@ const changeStrasse = async (req, res) => {
                 if (error) {
                     throw error;
                 }
-                res.sendStatus(200);
+                res.json({"message": "Street changed successfully."});
             });
     } catch (err) {
         console.log(err.stack);
@@ -94,10 +94,10 @@ const getStrasse = async (req, res) => {
                     throw error;
                 }
                 if (results.rows.length === 0) {
-                    res.sendStatus(404);
+                    res.sendStatus(404).json({"message": "No street found."});
                     return;
                 }
-                res.status(200).json({ "skz": skz, "strassenname": results.rows[0].strassenname });
+                res.json({ "skz": skz, "strassenname": results.rows[0].strassenname });
             });
     } catch (err) {
         console.log(err.stack);
@@ -113,7 +113,7 @@ const deleteStrasse = async (req, res) => {
                 if (error) {
                     throw error;
                 }
-                res.sendStatus(200);
+                res.json({"message": "Street deleted successfully."});
             });
     } catch (err) {
         console.log(err.stack);
