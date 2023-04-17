@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS public.strasse
                 if (error) {
                     throw error;
                 }
-                res.sendStatus(200);
+                res.sendStatus(201);
             });
     } catch (err) {
         console.log(err.stack);
@@ -58,7 +58,7 @@ const addStrasse = async (req, res) => {
                 if (error) {
                     throw error;
                 }
-                res.sendStatus(200);
+                res.sendStatus(201);
             });
     } catch (err) {
         console.log(err.stack);
