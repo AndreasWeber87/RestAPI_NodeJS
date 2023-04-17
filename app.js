@@ -11,8 +11,6 @@ const queries = require('./queries');
 
 const api = express();
 
-// parse application/x-www-form-urlencoded
-api.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 api.use(bodyParser.json());
 
