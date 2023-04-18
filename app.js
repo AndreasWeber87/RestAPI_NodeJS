@@ -16,10 +16,10 @@ api.use(bodyParser.json());
 
 api.get('/', queries.home);
 api.post('/createTable', queries.createTable);
-api.post('/addStrasse', queries.addStrasse);
-api.put('/changeStrasse/:skz', queries.changeStrasse);
-api.get('/getStrasse', queries.getStrasse);
-api.delete('/deleteStrasse/:skz', queries.deleteStrasse);
+api.post('/addStreet', queries.addStreet);
+api.put('/changeStreet/:skz', queries.changeStreet);
+api.get('/getStreet', queries.getStreet);
+api.delete('/deleteStreet/:skz', queries.deleteStreet);
 
 api.listen(8000, () => {
 //api.listen(10000, () => {
@@ -31,15 +31,15 @@ api.listen(8000, () => {
   console.log("POST: http://localhost:8000/createTable");
   console.log("	BODY:");
   console.log("");
-  console.log("POST: http://localhost:8000/addStrasse");
+  console.log("POST: http://localhost:8000/addStreet");
   console.log(" HEADER: Content-Type: application/json");
-  console.log("	BODY: {\"skz\":108711,\"strassenname\":\"Andromedastraße\"}");
+  console.log("	BODY: {\"skz\":108711,\"streetname\":\"Andromedastraße\"}");
   console.log("");
-  console.log("PUT: http://localhost:8000/changeStrasse/108711");
+  console.log("PUT: http://localhost:8000/changeStreet/108711");
   console.log("	HEADER: Content-Type: application/json");
-  console.log("	BODY: {\"strassenname\":\"Andromedastraße2\"}");
+  console.log("	BODY: {\"streetname\":\"Andromedastraße2\"}");
   console.log("");
-  console.log("GET: http://localhost:8000/getStrasse?skz=108711");
+  console.log("GET: http://localhost:8000/getStreet?skz=108711");
   console.log("");
-  console.log("DELETE: http://localhost:8000/deleteStrasse/108711");
+  console.log("DELETE: http://localhost:8000/deleteStreet/108711");
 });

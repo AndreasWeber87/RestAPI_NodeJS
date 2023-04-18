@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS public.strasse
     }
 };
 
-// POST: http://localhost:8000/addStrasse
+// POST: http://localhost:8000/addStreet
 // HEADER: Content-Type: application/json
-// BODY: {"skz":108711,"strassenname":"Andromedastraße"}
-const addStrasse = async (req, res) => {
+// BODY: {"skz":108711,"streetname":"Andromedastraße"}
+const addStreet= async (req, res) => {
     try {
         pool.query("INSERT INTO public.strasse(skz, strassenname) VALUES ($1, $2);", [req.body.skz, req.body.strassenname],
             (error) => {
@@ -66,10 +66,10 @@ const addStrasse = async (req, res) => {
     }
 };
 
-// PUT: http://localhost:8000/changeStrasse/108711
+// PUT: http://localhost:8000/changeStreet/108711
 // HEADER: Content-Type: application/json
-// BODY: {"strassenname":"Andromedastraße2"}
-const changeStrasse = async (req, res) => {
+// BODY: {"streetname":"Andromedastraße2"}
+const changeStreet = async (req, res) => {
     try {
         pool.query("UPDATE public.strasse SET strassenname=$1 WHERE skz=$2;", [req.body.strassenname, req.params.skz],
             (error) => {
@@ -84,8 +84,8 @@ const changeStrasse = async (req, res) => {
     }
 };
 
-// GET: http://localhost:8000/getStrasse?skz=108711
-const getStrasse = async (req, res) => {
+// GET: http://localhost:8000/getStreet?skz=108711
+const getStreet = async (req, res) => {
     try {
         const skz = parseInt(req.query.skz, 10);
         pool.query("SELECT strassenname FROM public.strasse WHERE skz=$1 LIMIT 1;", [skz],
@@ -97,7 +97,7 @@ const getStrasse = async (req, res) => {
                     res.sendStatus(404).json({"message": "No street found."});
                     return;
                 }
-                res.json({ "skz": skz, "strassenname": results.rows[0].strassenname });
+                res.json({ "skz": skz, "streetname": results.rows[0].strassenname });
             });
     } catch (err) {
         console.log(err.stack);
@@ -105,8 +105,8 @@ const getStrasse = async (req, res) => {
     }
 };
 
-// DELETE: http://localhost:8000/deleteStrasse/108711
-const deleteStrasse = async (req, res) => {
+// DELETE: http://localhost:8000/deleteStreet/108711
+const deleteStreet = async (req, res) => {
     try {
         pool.query("DELETE FROM public.strasse WHERE skz=$1;", [req.params.skz],
             (error) => {
@@ -124,8 +124,8 @@ const deleteStrasse = async (req, res) => {
 module.exports = {
     home,
     createTable,
-    addStrasse,
-    changeStrasse,
-    getStrasse,
-    deleteStrasse
+    addStreet,
+    changeStreet,
+    getStreet,
+    deleteStreet
 }
