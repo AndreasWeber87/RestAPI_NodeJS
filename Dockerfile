@@ -1,4 +1,4 @@
-FROM node:19.8.1-alpine
+FROM node:19.9.0-alpine
 
 # Workdir innerhalb des Containers festlegen
 WORKDIR /home/ic20b050/app
