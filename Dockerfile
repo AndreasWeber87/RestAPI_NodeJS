@@ -1,14 +1,14 @@
 FROM node:19.9.0-alpine
 
-# Workdir innerhalb des Containers festlegen
+# set Workdir inside the image
 WORKDIR /home/ic20b050/app
-# Kopiert das aktuelle Verzeichnis vom Host in das Image Verzeichnis
+# copy the current dir from the host in the image dir
 ADD . /home/ic20b050/app
 
-# installiert die Node-Modules
+# install the Node-Modules from package.json
 RUN npm install
 
-# gibt den Port 8000 frei
+# release the port to the host
 EXPOSE 8000
 
 CMD ["node", "app.js"]
