@@ -3,8 +3,7 @@
 const Pool = require('pg').Pool;
 
 const pool = new Pool({
-    //host: '127.0.0.1',
-    host: '192.168.0.2', // container ip
+    host: '192.168.0.2',
     port: 5432,
     user: 'postgres',
     password: 'xsmmsgbAMfIOIWPPBrsc',
@@ -23,7 +22,7 @@ const home = (req, res) => {
 const createTable = async (req, res) => {
     const sqlQuery = `DROP TABLE IF EXISTS public.strasse;
 
-CREATE TABLE IF NOT EXISTS public.strasse
+CREATE TABLE public.strasse
 (
     skz integer NOT NULL,
     strassenname character varying(100) COLLATE pg_catalog."default",
@@ -82,7 +81,7 @@ const getStreet = async (req, res) => {
                 return;
             }
             if (results.rows.length === 0) {
-                res.status(404).json({"message": "No street found."});
+                res.json({"message": "No street found."});
                 return;
             }
             res.json({"skz": skz, "streetname": results.rows[0].strassenname});
