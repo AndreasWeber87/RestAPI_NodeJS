@@ -60,10 +60,14 @@ const addStreet = async (req, res) => {
 // BODY: {"streetname":"Andromedastraße2"}
 const changeStreet = async (req, res) => {
     pool.query("UPDATE public.strasse SET strassenname=$1 WHERE skz=$2;", [req.body.streetname, req.params.skz],
-        (error) => {
+        (error, results) => {
             if (error) {
                 console.log(error.stack);
                 res.status(500).send("");
+                return;
+            }
+            if (results.rowCount === 0) {
+                res.json({"message": "ID not found."});
                 return;
             }
             res.json({"message": "Street changed successfully."});
