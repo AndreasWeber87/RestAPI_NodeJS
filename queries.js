@@ -95,10 +95,14 @@ const getStreet = async (req, res) => {
 // DELETE: http://localhost:8000/deleteStreet/108711
 const deleteStreet = async (req, res) => {
     pool.query("DELETE FROM public.strasse WHERE skz=$1;", [req.params.skz],
-        (error) => {
+        (error, results) => {
             if (error) {
                 console.log(error.stack);
                 res.status(500).send("");
+                return;
+            }
+            if (results.rows.length === 0) {
+                res.json({"message": "No street found."});
                 return;
             }
             res.json({"message": "Street deleted successfully."});
