@@ -85,7 +85,7 @@ const getStreet = async (req, res) => {
                 return;
             }
             if (results.rows.length === 0) {
-                res.json({"message": "No street found."});
+                res.json({"message": "ID not found."});
                 return;
             }
             res.json({"skz": skz, "streetname": results.rows[0].strassenname});
