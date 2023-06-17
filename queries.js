@@ -101,8 +101,8 @@ const deleteStreet = async (req, res) => {
                 res.status(500).send("");
                 return;
             }
-            if (results.rows.length === 0) {
-                res.json({"message": "No street found."});
+            if (results.rowCount === 0) {
+                res.json({"message": "ID not found."});
                 return;
             }
             res.json({"message": "Street deleted successfully."});
