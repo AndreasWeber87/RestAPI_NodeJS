@@ -7,7 +7,7 @@ const pool = new Pool({
     port: 5432,
     user: 'postgres',
     password: 'xsmmsgbAMfIOIWPPBrsc',
-    database: 'ogd',
+    database: 'OGD',
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
 });
