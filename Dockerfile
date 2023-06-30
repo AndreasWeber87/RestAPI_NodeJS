@@ -1,4 +1,4 @@
-FROM node:19.9.0-alpine
+FROM node:20.3-alpine
 
 # set Workdir inside the image
 WORKDIR /home/ic20b050/app
