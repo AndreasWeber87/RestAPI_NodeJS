@@ -14,6 +14,7 @@ const api = express();
 // parse application/json
 api.use(bodyParser.json());
 
+// configure the API endpoints
 api.get('/', queries.home);
 api.post('/createTable', queries.createTable);
 api.post('/addStreet', queries.addStreet);
